@@ -27,50 +27,47 @@
     </header>    
     <main>
       <div class="contenedor">
-        <nav class="nav-tabs">
-          <ul>
-            <li>
-              <div class="grupo-botones grupo-1">
-                <button id="btnEncriptar" class="boton active" onclick="encriptarTexto()">
-                  Encriptar
-                </button>                
-                <button id="btnDescencriptar" class="boton" onclick="desecriptarTexto()">
-                  descencriptar
-                </button>
-              </div>
-            </li>
-            
-            <button class="boton-icono boton-enviar-texto" onclick="intercambiarProcesos()">
-              <span class="material-symbols-outlined">
-                sync_alt
-              </span>
+        <div class="columna">
+          <div class="grupo-botones grupo-1">
+            <button id="btnEncriptar" class="boton active" onclick="encriptarTexto()">
+              Encriptar
+            </button>                
+            <button id="btnDescencriptar" class="boton" onclick="desecriptarTexto()">
+              descencriptar
             </button>
-            
-            <li>
-              <div class="grupo-botones  grupo-2">
-                <button  id="botonValorProceso" class="boton active"></button>
-                <!-- <button id="btnEncriptar2" class="boton" onclick="encriptarTexto(2)">
-                  Encriptar
-                </button>                
-                <button id="btnDescencriptar2" class="boton  active" onclick="desecriptarTexto(2)">
-                  Desencriptar
-                </button> -->
-              </div>
-            </li>
-          </ul>
-        </nav>
+          </div>
+        </div>
+        <button class="boton-icono boton-enviar-texto" onclick="intercambiarProcesos()">
+          <span class="material-symbols-outlined">
+            sync_alt
+          </span>
+        </button>
+        <div class="columna">
+          <div class="grupo-botones">
+            <div class="grupo-botones  grupo-2">
+              <button  id="botonValorProceso" class="boton active"></button>
+            </div>
+          </div>
+        </div>        
       </div>
       
 
 
       <div class="contenedor-text-area">
-        <div class="column-textarea">
+        <div class="columna">
           <textarea id="textBox1" name="textBox1" id="" rows="10" autofocus onkeyup="procesar()"></textarea>
         </div>
         
-        <div class="column-textarea">
-          
-          <textarea id="textBox2" name="text-2" id="" cols="30" rows="10" disabled></textarea>
+        <div class="columna">
+          <div class="contenido-encriptado">
+            <textarea id="textBox2" readonly></textarea>
+            <button class="boton-copiar">
+              <svg width="25px" height="25px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6 11C6 8.17157 6 6.75736 6.87868 5.87868C7.75736 5 9.17157 5 12 5H15C17.8284 5 19.2426 5 20.1213 5.87868C21 6.75736 21 8.17157 21 11V16C21 18.8284 21 20.2426 20.1213 21.1213C19.2426 22 17.8284 22 15 22H12C9.17157 22 7.75736 22 6.87868 21.1213C6 20.2426 6 18.8284 6 16V11Z" stroke="#1C274C" stroke-width="1.5"/>
+                <path opacity="0.5" d="M6 19C4.34315 19 3 17.6569 3 16V10C3 6.22876 3 4.34315 4.17157 3.17157C5.34315 2 7.22876 2 11 2H15C16.6569 2 18 3.34315 18 5" stroke="#1C274C" stroke-width="1.5"/>
+                </svg>
+            </button>
+          </div>
         </div>
         
 

@@ -67,7 +67,7 @@ function encriptar() {
   for (let i = 0; i < vocales.length; i++ ) {
     texto = texto.replaceAll(vocales[i], claves[i]);
     console.log("texto nuevo: ", texto);
-    document.querySelector('#textBox2').value = texto;
+    document.querySelector('#textBox2').innerHTML = texto;
   }
 }
 
@@ -79,7 +79,7 @@ function desencriptar() {
   for (let i = 0; i < claves.length; i++ ) {
     texto = texto.replaceAll(claves[i], vocales[i]);
     console.log("textonuevo", texto);
-    document.querySelector('#textBox2').value = texto;
+    document.querySelector('#textBox2').innerHTML = texto;
   }
 }
 
@@ -88,10 +88,10 @@ function desencriptar() {
 function intercambiarProcesos() {
   
   let text1 = document.querySelector('#textBox1').value;  
-  let text2 = document.querySelector('#textBox2').value;
+  let text2 = document.querySelector('#textBox2').innerHTML;
 
   document.querySelector('#textBox1').value = text2;
-  document.querySelector('#textBox2').value = text1;
+  document.querySelector('#textBox2').innerHTML = text1;
 
   if(operacion === 1) {
     desecriptarTexto(1)
