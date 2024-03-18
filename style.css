@@ -1,0 +1,169 @@
+* {
+  box-sizing: border-box;
+  font-size: 14px;
+  margin: 0; 
+  font-family: "Poppins", sans-serif;
+  font-style: normal;
+  --border-width: 1px;
+  --border-color: rgba(148, 148, 148, 0.2);
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  /* background: rgb(2,0,36); */
+  /* background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(217,229,237,1) 0%, rgba(242,243,247,1) 100%); */
+  background: linear-gradient(#d9e5ed, #f2f3f7);
+}
+
+header {
+  height: 6rem;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  border-bottom: var(--border-width) solid var(--border-color);
+}
+
+header nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+}
+
+.brand {
+  font-size: 2rem;
+  letter-spacing: 2px;
+  font-weight: 700;
+
+}
+
+ul {
+  display: flex;
+  gap: 8px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  padding: 0 8px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+main {
+  flex: 1 1;
+  position: relative;
+}
+
+.contenedor,
+.contenedor-text-area {
+  padding: 1rem 10%;
+  display: flex;
+  gap: 2rem;
+  width: 100%;
+  /* display: flex;
+  flex-wrap: wrap; */
+}
+
+
+.nav-tabs {
+  width: 100%;
+  display: flex;
+}
+
+.nav-tabs ul {
+  width: 100%;
+  justify-content: space-around;
+}
+.nav-tabs ul {
+  vertical-align: middle;
+}
+
+.column-textarea {
+  width: 50%;
+}
+
+textarea {
+  border: var(--border-width) solid var(--border-color);
+  border-radius: 1rem;
+  width: 100%;
+  padding: 2rem;
+}
+
+textarea:focus {
+  box-shadow: none;
+  outline: 0;
+}
+
+
+footer {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: auto;
+  padding: 0 ;
+  height: 4rem;
+  border-top: var(--border-width) solid var(--border-color);
+}
+
+.boton-icono {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  border: 0;
+  background-color: transparent;
+  color: rgba(0, 0, 0, 0.525);
+  outline: 0;
+}
+
+.boton-icono:hover {
+  background-color: #f0f0f0;
+  cursor: pointer;
+}
+
+
+.grupo-botones {
+  display: flex;
+  gap: 8px;
+}
+
+
+
+.boton {
+  padding: 8px 20px;
+  border: 0;
+  background-color: #fff;
+  text-transform: uppercase;
+  cursor: pointer;
+  letter-spacing: 2px;
+  transition: .3s all ease;
+}
+.boton.active,
+.boton:hover {
+  border-bottom: 4px solid #3f3f3f;
+  background-color: #f2f2f2;
+}
+
+
+@media (max-width: 768px) {
+  .contenedor-text-area {
+    flex-direction: column;
+  }
+
+  .column-textarea {
+    width: 100%;
+  }
+  
+}
+
+.boton-enviar-texto {
+  position: absolute;
+}
