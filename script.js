@@ -122,5 +122,10 @@ function alerta(mensaje, estado) {
   }, 2000);
 }
 
+function reiniciar() {
+  textArea.value = '';
+  mensaje.value = '';
+  elegirOperacion('btnDescencriptar', 'btnEncriptar', 'encriptar');
+}
 
 cambiarTextoProceso();

@@ -68,6 +68,7 @@ main {
 
 .columna {
   width: 50%;
+  position: relative;
 }
 
 .boton-copiar {
@@ -93,21 +94,36 @@ main {
   position: relative;
 }
 
-#textBox2 {
+.mensaje-procesado {
   border: 0;
   border-radius: 0;
   background-color: transparent;
   padding: 0;
   height: 100%;
+  width: 100%;
   resize: none;
+  overflow-y: scroll;
 }
 
-textarea {
+.mensaje-procesado::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.mensaje-procesado,
+.text-area {
+-ms-overflow-style: none;  /* IE and Edge */
+scrollbar-width: none;  /* Firefox */
+}
+
+
+.text-area {
   border: var(--border-width) solid var(--border-color);
   border-radius: 1rem;
   width: 100%;
   padding: 2rem;
   height: 100%;
+  resize: none;
 }
 
 textarea:focus {
@@ -133,6 +149,11 @@ textarea:focus {
   cursor: pointer;
 }
 
+.boton-borrar {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
 
 .grupo-botones {
   display: flex;
