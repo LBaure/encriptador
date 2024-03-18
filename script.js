@@ -1,104 +1,126 @@
-let btnEncriptar1 = document.querySelector('#btnEncriptar');
-let btnDescencriptar1 = document.querySelector('#btnDescencriptar');
-let btnEncriptar2 = document.querySelector('#btnEncriptar2');
-let btnDescencriptar2 = document.querySelector('#btnDescencriptar2');
-let operacion = 1;
-
-let vocales = ['a', 'e', 'i', 'o', 'u']
-let claves = ['f4C2', '%238923', '023%#F:342', '04', '~5']
+const textArea = document.querySelector('.text-area');
+const mensaje = document.querySelector('.mensaje-procesado')
+const btnEncriptar = document.querySelector('#btnEncriptar');
+const btnDescencriptar = document.querySelector('#btnDescencriptar');
+let procesoRealizar = 'encriptar' // encriptar | desencriptar
 
 
-cambiarTextoProceso();
-function encriptarTexto(grupo) {
-  operacion = 1;
+const matrizCodigo = [
+  ['e', 'enter'],
+  ['i', 'imes'],
+  ['a', 'ai'],
+  ['o', 'ober'],
+  ['u', 'ufat']
+]
+
+function elegirOperacion(botonRemoverClase, botonAgregarClase, tipoProceso) {
+  procesoRealizar = tipoProceso
   cambiarTextoProceso();
-  removeClass(btnDescencriptar1);
-  addClass(btnEncriptar1);
+  removeClass(botonRemoverClase);
+  addClass(botonAgregarClase);
   procesar();
 }
 
 function cambiarTextoProceso() {
-  let complemento = operacion === 1 ? 'Encriptado' : 'Descencriptado'
+  let complemento = procesoRealizar === 'encriptar' ? 'Encriptado' : 'Descencriptado'
   document.querySelector('#botonValorProceso').innerHTML = `Texto ${complemento}`
-
 }
 
-function desecriptarTexto() {
-  operacion = 2;
-  cambiarTextoProceso();
-    removeClass(btnEncriptar1);
-    // removeClass(btnDescencriptar2);
-
-    addClass(btnDescencriptar1);
-    // addClass(btnEncriptar2);   
-    procesar();
-  
-
+function removeClass(boton) {
+  let botonRemover = document.querySelector(`#${boton}`);
+  if (botonRemover.className.includes('active')) {
+    botonRemover.classList.remove('active')
+  }  
 }
 
-
-function removeClass(btn) {
-  if(btn.className.includes('active')) {
-    btn.classList.remove('active');
-  }
-}
-
-function addClass(btn) {
-  if (!btn.className.includes('active')) {
-    btn.classList.add('active')
+function addClass(boton) {
+  let botonAgregar = document.querySelector(`#${boton}`);
+  if (!botonAgregar.className.includes('active')) {
+    botonAgregar.classList.add('active')
   }
 }
 
 
 function procesar() {
-  console.log("operacion", operacion);
-  if (operacion === 1) {
-    encriptar();
+  console.log("procesoRealizar", procesoRealizar);
+  if (procesoRealizar === 'encriptar') {
+    encriptarTexto();
   } else {
-    desencriptar();
-  }
-}
-
-function encriptar() {  
-  console.log("funcion encriptar");
-  let valorTexto = document.querySelector('#textBox1').value;
-  let texto = valorTexto;
-
-  for (let i = 0; i < vocales.length; i++ ) {
-    texto = texto.replaceAll(vocales[i], claves[i]);
-    console.log("texto nuevo: ", texto);
-    document.querySelector('#textBox2').innerHTML = texto;
-  }
-}
-
-function desencriptar() {
-  console.log("funcion desencriptar");
-  let valorTexto = document.querySelector('#textBox1').value;
-  let texto = valorTexto;
-  console.log("entro", texto);
-  for (let i = 0; i < claves.length; i++ ) {
-    texto = texto.replaceAll(claves[i], vocales[i]);
-    console.log("textonuevo", texto);
-    document.querySelector('#textBox2').innerHTML = texto;
+    desencriptarTexto();
   }
 }
 
 
+function encriptarTexto() {
+  let valorTextArea = textArea.value;
+  valorTextArea = valorTextArea.toLowerCase();
+
+  for(let i = 0; i < matrizCodigo.length; i++){
+    // condicion para validar si el valorTextArea estan dentro del array
+    if (valorTextArea.includes(matrizCodigo[i][0])) {
+      valorTextArea = valorTextArea.replaceAll(matrizCodigo[i][0], matrizCodigo[i][1])
+    }
+  }
+  mensaje.value = valorTextArea;
+}
+
+
+function desencriptarTexto() {
+  let valorTextArea = textArea.value;
+  valorTextArea = valorTextArea.toLowerCase();
+
+  console.log("valorTextArea", valorTextArea);
+  
+  for(let i = 0; i < matrizCodigo.length; i++){
+    // condicion para validar si el valorTextArea estan dentro del array
+    if (valorTextArea.includes(matrizCodigo[i][1])) {
+      valorTextArea = valorTextArea.replaceAll(matrizCodigo[i][1], matrizCodigo[i][0])
+    }
+  }
+  mensaje.value = valorTextArea;
+}
 
 function intercambiarProcesos() {
-  
-  let text1 = document.querySelector('#textBox1').value;  
-  let text2 = document.querySelector('#textBox2').innerHTML;
+  let textoAreaTemp = textArea.value;
+  textArea.value = mensaje.value;
+  mensaje.value = textoAreaTemp;
 
-  document.querySelector('#textBox1').value = text2;
-  document.querySelector('#textBox2').innerHTML = text1;
-
-  if(operacion === 1) {
-    desecriptarTexto(1)
+  if (procesoRealizar === 'encriptar') {
+    elegirOperacion('btnEncriptar', 'btnDescencriptar', 'desencriptar');
   } else {
-    encriptarTexto(1);
+    elegirOperacion('btnDescencriptar', 'btnEncriptar', 'encriptar');
+  }
+}
+
+
+function btnCopiar() {
+  const texto = mensaje.value;
+  if (!texto) {
+    alerta('No hay nada que copiar ;(', 'error')
+    return;
   }
 
-
-
+  navigator.clipboard
+    .writeText(texto)
+    .then(function () {
+      alerta("Texto copiado correctamente :)", 'ok');
+    })
+    .catch(function (error) {
+      console.error("Error al copiar el texto: ", error);
+    });
 }
+
+
+function alerta(mensaje, estado) {
+  let alerta = document.querySelector('.alerta');
+  alerta.style.background = estado === 'ok' ? '#2A2B2E' : '#FF928B'; 
+  alerta.innerHTML = mensaje
+  alerta.style.opacity = '1';
+
+  setTimeout(() => {    
+  alerta.style.opacity = '0';
+  }, 2000);
+}
+
+
+cambiarTextoProceso();
