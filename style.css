@@ -153,6 +153,7 @@ textarea:focus {
   position: absolute;
   right: 10px;
   top: 10px;
+  display: none;
 }
 
 .grupo-botones {
@@ -218,8 +219,20 @@ footer {
     flex-direction: column;
   }
 
-  .column-textarea {
+  header nav {
+    flex-direction: column;
+    margin-top: 16px;
+  }
+  header nav ul {
+    padding: 6px 0;
+  }
+
+  .columna {
     width: 100%;
+  }
+  .boton-enviar-texto,
+  .columna-valor-proceso {
+    display: none;
   }
   
 }

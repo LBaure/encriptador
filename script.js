@@ -2,6 +2,7 @@ const textArea = document.querySelector('.text-area');
 const mensaje = document.querySelector('.mensaje-procesado')
 const btnEncriptar = document.querySelector('#btnEncriptar');
 const btnDescencriptar = document.querySelector('#btnDescencriptar');
+const btnBorrar = document.querySelector('.boton-borrar');
 let procesoRealizar = 'encriptar' // encriptar | desencriptar
 
 
@@ -42,7 +43,13 @@ function addClass(boton) {
 
 
 function procesar() {
-  console.log("procesoRealizar", procesoRealizar);
+  // muestra/oculta el boton para borrar el contenido del textarea
+  if (textArea.value) {
+    btnBorrar.style.display = 'flex';
+  } else {
+    btnBorrar.style.display = 'none';
+  }
+
   if (procesoRealizar === 'encriptar') {
     encriptarTexto();
   } else {
@@ -126,6 +133,17 @@ function reiniciar() {
   textArea.value = '';
   mensaje.value = '';
   elegirOperacion('btnDescencriptar', 'btnEncriptar', 'encriptar');
+  textArea.setAttribute("style", "height:auto;");
 }
 
 cambiarTextoProceso();
+
+
+// hacer auto height a text-area
+textArea.setAttribute("style", "height:" + (textArea.scrollHeight) + "px;overflow-y:hidden;");
+textArea.addEventListener("input", OnInput, false);
+
+function OnInput() {
+  this.style.height = 'auto';
+  this.style.height = (this.scrollHeight) + "px";
+}
