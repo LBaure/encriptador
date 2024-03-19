@@ -52,6 +52,11 @@ li {
   cursor: pointer;
 }
 
+.lista-header li:hover a {
+  font-weight: 600;
+  transform: scale(2);
+}
+
 main {
   flex: 1 1;
   position: relative;
