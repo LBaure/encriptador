@@ -147,15 +147,7 @@ function OnInput() {
   this.style.height = (this.scrollHeight) + "px";
 }
 
-// textArea.addEventListener("keydown", (event) => {
-//   let caracter =  event.key;
-//   if (!caracter || caracter < 1 || !(/^[a-z]{1}$/.test(caracter))) {
-//     event.preventDefault();
-//     alerta("Solo se permiten letras minúsculas, sin caracteres especiales y sin acentos", 'error');
-//   }
-// });
-
-textArea.addEventListener("input", (event) => {
+textArea.addEventListener("keydown", (event) => {
   let caracter =  event.key;
   if (!caracter || caracter < 1 || !(/^[a-z]{1}$/.test(caracter))) {
     event.preventDefault();
