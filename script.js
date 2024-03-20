@@ -155,13 +155,27 @@ function OnInput() {
 //   }
 // });
 
-textArea.addEventListener("input", (event) => {
+// textArea.addEventListener("input", (event) => {
+//   const inputValue = event.target.value;
+//   const ultimoCaracter = inputValue.slice(-1);
+//   const caracteresPermitidos = ultimoCaracter === " " || /^[a-z]{1}$/.test(ultimoCaracter);
+
+//   // if (!caracteresPermitidos) {
+//   if (!(event.key == " " || event.key.length > 1 || (event.key.length == 1 && caracteresPermitidos))) {
+//     alert("Solo se permiten letras minúsculas y espacios, sin caracteres especiales y sin acentos");
+//     event.target.value = inputValue.slice(0, -1); // Eliminar el último carácter ingresado
+//   }
+// });
+
+
+
+textArea.addEventListener("input", (event) => {  
   const inputValue = event.target.value;
   const ultimoCaracter = inputValue.slice(-1);
-  const caracteresPermitidos = ultimoCaracter === " " || /^[a-z]$/.test(ultimoCaracter);
-
-  if (!caracteresPermitidos) {
-    alert("Solo se permiten letras minúsculas y espacios, sin caracteres especiales y sin acentos");
-    event.target.value = inputValue.slice(0, -1); // Eliminar el último carácter ingresado
+  const caracteresPermitidos = ultimoCaracter  === " " || /^[a-z]{1}$/.test(ultimoCaracter);
+  if (inputValue.length && !caracteresPermitidos ) {
+    alerta("Solo se permiten letras minúsculas y espacios, sin caracteres especiales y sin acentos", 'error');
+    event.preventDefault();
+    event.target.value = inputValue.slice(0, -1); 
   }
 });
