@@ -157,11 +157,3 @@ textArea.addEventListener("keydown", (event) => {
 });
 
 
-textArea.addEventListener("input", (event) => {
-  let caracter = event.key;
-  if (caracter== " " || caracter > 1 || (caracter.length == 1 && /^[a-z]{1}$/.test(caracter))) {
-  } else {
-    alerta("Solo se permiten letras minúsculas, sin caracteres especiales y sin acentos", 'error');
-    event.preventDefault();
-  }
-});
