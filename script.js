@@ -148,10 +148,18 @@ function OnInput() {
 }
 
 textArea.addEventListener("keydown", (event) => {
-  let letra = event.key;
-  if (event.key == " " || event.key.length > 1 || (event.key.length == 1 && /^[a-z]{1}$/.test(letra))) {
-  } else {
-    alerta("Solo se permiten letras minúsculas, sin caracteres especiales y sin acentos", 'error');
+  
+  const caracteresPermitidos = event.key === " " || /^[a-z]{1}$/.test(event.key);
+  if (!(event.key == " " || event.key.length > 1 || (event.key.length == 1 && caracteresPermitidos))) {
+    alerta("Solo se permiten letras minúsculas y espacios, sin caracteres especiales y sin acentos", "error");
     event.preventDefault();
   }
+
+
+
+  // if (event.key == " " || event.key.length > 1 || (event.key.length == 1 && /^[a-z]{1}$/.test(letra))) {
+  // } else {
+  //   alerta("Solo se permiten letras minúsculas, sin caracteres especiales y sin acentos", 'error');
+  //   event.preventDefault();
+  // }
 });
