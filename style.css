@@ -220,6 +220,7 @@ footer {
   position: absolute;
   top: 0;
   right: 20px;
+  visibility: hidden;
   opacity: 0;
 	transition: opacity 1s;
 }

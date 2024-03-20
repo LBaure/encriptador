@@ -5,7 +5,6 @@ const btnDescencriptar = document.querySelector('#btnDescencriptar');
 const btnBorrar = document.querySelector('.boton-borrar');
 let procesoRealizar = 'encriptar' // encriptar | desencriptar
 
-
 const matrizCodigo = [
   ['e', 'enter'],
   ['i', 'imes'],
@@ -14,17 +13,38 @@ const matrizCodigo = [
   ['u', 'ufat']
 ]
 
+
+// Este bloque de codigo sirve para aumentar el tamaño del textarea
+// de forma dinamica, cuando va creciendo se le va asignando el alto.
+textArea.addEventListener("input", OnInput, false);
+
+function OnInput() {
+  this.style.height = 'auto';
+  this.style.height = (this.scrollHeight) + "px";
+}
+
+// Este bloque de codigo limitamos a que el textarea acepte caracteres
+// especiales, numeros y mayusculas
+textArea.addEventListener("input", (event) => {  
+  const inputValue = event.target.value;
+  const ultimoCaracter = inputValue.slice(-1);
+  const caracteresPermitidos = ultimoCaracter  === " " || /^[a-z]{1}$/.test(ultimoCaracter);
+  if (inputValue.length && !caracteresPermitidos ) {
+    alerta("Solo se permiten letras minúsculas y espacios, sin caracteres especiales y sin acentos", 'error');
+    event.preventDefault();
+    event.target.value = inputValue.slice(0, -1); 
+  }
+});
+
 function elegirOperacion(botonRemoverClase, botonAgregarClase, tipoProceso) {
   procesoRealizar = tipoProceso
-  cambiarTextoProceso();
+  // ********************** Cambia el texto del boton del mensaje **********************
+  let complemento = procesoRealizar === 'encriptar' ? 'Encriptado' : 'Descencriptado'
+  document.querySelector('#botonValorProceso').innerHTML = `Texto ${complemento}`
+  // ***********************************************************************************
   removeClass(botonRemoverClase);
   addClass(botonAgregarClase);
   procesar();
-}
-
-function cambiarTextoProceso() {
-  let complemento = procesoRealizar === 'encriptar' ? 'Encriptado' : 'Descencriptado'
-  document.querySelector('#botonValorProceso').innerHTML = `Texto ${complemento}`
 }
 
 function removeClass(boton) {
@@ -77,8 +97,6 @@ function encriptarTexto() {
 function desencriptarTexto() {
   let valorTextArea = textArea.value;
   valorTextArea = valorTextArea.toLowerCase();
-
-  console.log("valorTextArea", valorTextArea);
   
   for(let i = 0; i < matrizCodigo.length; i++){
     // condicion para validar si el valorTextArea estan dentro del array
@@ -125,9 +143,11 @@ function alerta(mensaje, estado) {
   alerta.style.background = estado === 'ok' ? '#2A2B2E' : '#c52f2f'; 
   alerta.innerHTML = mensaje
   alerta.style.opacity = '1';
+  alerta.style.visibility = 'visible';
 
   setTimeout(() => {    
   alerta.style.opacity = '0';
+  alerta.style.visibility = 'hidden';
   }, 3000);
 }
 
@@ -137,45 +157,3 @@ function reiniciar() {
   elegirOperacion('btnDescencriptar', 'btnEncriptar', 'encriptar');
   textArea.setAttribute("style", "height:auto;");
 }
-
-cambiarTextoProceso();
-
-textArea.addEventListener("input", OnInput, false);
-
-function OnInput() {
-  this.style.height = 'auto';
-  this.style.height = (this.scrollHeight) + "px";
-}
-
-// textArea.addEventListener("keydown", (event) => {  
-//   const caracteresPermitidos = event.key === " " || /^[a-z]{1}$/.test(event.key);
-//   if (!(event.key == " " || event.key.length > 1 || (event.key.length == 1 && caracteresPermitidos))) {
-//     alert("Solo se permiten letras minúsculas y espacios, sin caracteres especiales y sin acentos");
-//     event.preventDefault();
-//   }
-// });
-
-// textArea.addEventListener("input", (event) => {
-//   const inputValue = event.target.value;
-//   const ultimoCaracter = inputValue.slice(-1);
-//   const caracteresPermitidos = ultimoCaracter === " " || /^[a-z]{1}$/.test(ultimoCaracter);
-
-//   // if (!caracteresPermitidos) {
-//   if (!(event.key == " " || event.key.length > 1 || (event.key.length == 1 && caracteresPermitidos))) {
-//     alert("Solo se permiten letras minúsculas y espacios, sin caracteres especiales y sin acentos");
-//     event.target.value = inputValue.slice(0, -1); // Eliminar el último carácter ingresado
-//   }
-// });
-
-
-
-textArea.addEventListener("input", (event) => {  
-  const inputValue = event.target.value;
-  const ultimoCaracter = inputValue.slice(-1);
-  const caracteresPermitidos = ultimoCaracter  === " " || /^[a-z]{1}$/.test(ultimoCaracter);
-  if (inputValue.length && !caracteresPermitidos ) {
-    alerta("Solo se permiten letras minúsculas y espacios, sin caracteres especiales y sin acentos", 'error');
-    event.preventDefault();
-    event.target.value = inputValue.slice(0, -1); 
-  }
-});
