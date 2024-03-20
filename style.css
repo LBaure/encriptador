@@ -120,13 +120,11 @@ main {
   display: none;
 }
 
-/* Hide scrollbar for IE, Edge and Firefox */
 .mensaje-procesado,
 .text-area {
--ms-overflow-style: none;  /* IE and Edge */
-scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none; 
+  scrollbar-width: none;
 }
-
 
 .text-area {
   border: var(--border-width) solid var(--border-color);
@@ -249,4 +247,9 @@ footer {
     display: none;
   }
   
+  footer {
+    flex-direction: column;
+    padding: 32px 0;
+    gap: 8px;
+  }
 }

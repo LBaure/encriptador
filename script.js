@@ -148,8 +148,18 @@ function OnInput() {
 }
 
 textArea.addEventListener("keydown", (event) => {
-  let letra = event.key;
-  if (event.key == " " || event.key.length > 1 || (event.key.length == 1 && /^[a-z]{1}$/.test(letra))) {
+  let caracter = event.key;
+  if (caracter== " " || caracter > 1 || (caracter.length == 1 && /^[a-z]{1}$/.test(caracter))) {
+  } else {
+    alerta("Solo se permiten letras minúsculas, sin caracteres especiales y sin acentos", 'error');
+    event.preventDefault();
+  }
+});
+
+
+textArea.addEventListener("input", (event) => {
+  let caracter = event.key;
+  if (caracter== " " || caracter > 1 || (caracter.length == 1 && /^[a-z]{1}$/.test(caracter))) {
   } else {
     alerta("Solo se permiten letras minúsculas, sin caracteres especiales y sin acentos", 'error');
     event.preventDefault();
