@@ -140,6 +140,15 @@ textarea:focus {
   outline: 0;
 }
 
+.informacion-textarea {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  letter-spacing: .5px;
+  color: #58585D;
+  font-weight: 400;
+}
+
 .boton-icono {
   display: flex;
   justify-content: center;
