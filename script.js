@@ -148,9 +148,10 @@ function OnInput() {
 }
 
 textArea.addEventListener("keydown", (event) => {
-  let caracter =  event.key;
-  if (!caracter || caracter < 1 || !(/^[a-z]{1}$/.test(caracter))) {
-    event.preventDefault();
+  let letra = event.key;
+  if (event.key == " " || event.key.length > 1 || (event.key.length == 1 && /^[a-z]{1}$/.test(letra))) {
+  } else {
     alerta("Solo se permiten letras minúsculas, sin caracteres especiales y sin acentos", 'error');
+    event.preventDefault();
   }
 });
