@@ -147,21 +147,21 @@ function OnInput() {
   this.style.height = (this.scrollHeight) + "px";
 }
 
-textArea.addEventListener("keydown", (event) => {  
-  const caracteresPermitidos = event.key === " " || /^[a-z]{1}$/.test(event.key);
-  if (!(event.key == " " || event.key.length > 1 || (event.key.length == 1 && caracteresPermitidos))) {
-    alert("Solo se permiten letras minúsculas y espacios, sin caracteres especiales y sin acentos");
-    event.preventDefault();
-  }
-});
+// textArea.addEventListener("keydown", (event) => {  
+//   const caracteresPermitidos = event.key === " " || /^[a-z]{1}$/.test(event.key);
+//   if (!(event.key == " " || event.key.length > 1 || (event.key.length == 1 && caracteresPermitidos))) {
+//     alert("Solo se permiten letras minúsculas y espacios, sin caracteres especiales y sin acentos");
+//     event.preventDefault();
+//   }
+// });
 
-textArea.addEventListener("input", (event) => {  
-  const inputText = event.data || event.target.value.slice(-1); // Seleccionar el último carácter ingresado
-  const caracteresPermitidos = inputText === " " || /^[a-z]{1}$/.test(inputText);
-  
-  if (!(event.key == " " || event.key.length > 1 || (event.key.length == 1 && caracteresPermitidos))) {
+textArea.addEventListener("input", (event) => {
+  const inputValue = event.target.value;
+  const ultimoCaracter = inputValue.slice(-1);
+  const caracteresPermitidos = ultimoCaracter === " " || /^[a-z]$/.test(ultimoCaracter);
+
+  if (!caracteresPermitidos) {
     alert("Solo se permiten letras minúsculas y espacios, sin caracteres especiales y sin acentos");
-    event.preventDefault();
-    textArea.value = textArea.value.slice(0, -1); // Eliminar el último carácter ingresado
+    event.target.value = inputValue.slice(0, -1); // Eliminar el último carácter ingresado
   }
 });
