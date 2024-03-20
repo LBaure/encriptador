@@ -12,7 +12,7 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  /* background: linear-gradient(#d9e5ed, #f2f3f7); */
+  background: linear-gradient(#d9e5ed, #f2f3f7);
 }
 
 header {
@@ -21,6 +21,7 @@ header {
   margin: 0;
   display: flex;
   align-items: center;
+  margin-bottom: 20px;
   border-bottom: var(--border-width) solid var(--border-color);
 }
 
@@ -97,6 +98,11 @@ main {
   padding: 2rem;
   height: 100%;
   position: relative;
+  transition: background .3ms all;
+  background-image: url('imagenes/undraw_file_searching_re_3evy.svg');
+  background-position: calc(100% - 50px) 40px;
+  background-size: 25%;
+  background-repeat: no-repeat;
 }
 
 .mensaje-procesado {
@@ -206,18 +212,21 @@ footer {
 .alerta {
   border-radius: 4px;
   min-width: 200px;
-  padding: 0 24px; 
-  height: 40px;
+  max-width: 250px;
+  padding: 12px 24px; 
+  height: auto;
   display: flex;
   justify-content: center;
   align-items: center;
   color: #fff;
   position: absolute;
-  bottom: 20px;
+  top: 0;
   right: 20px;
   opacity: 0;
 	transition: opacity 1s;
 }
+
+
 
 @media (max-width: 768px) {
   .contenedor-text-area {

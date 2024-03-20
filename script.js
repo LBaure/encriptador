@@ -46,8 +46,10 @@ function procesar() {
   // muestra/oculta el boton para borrar el contenido del textarea
   if (textArea.value) {
     btnBorrar.style.display = 'flex';
+    document.querySelector('.contenido-encriptado').style.backgroundImage ='none'
   } else {
     btnBorrar.style.display = 'none';
+    document.querySelector('.contenido-encriptado').style.backgroundImage ='url(imagenes/undraw_file_searching_re_3evy.svg)'
   }
 
   if (procesoRealizar === 'encriptar') {
@@ -120,13 +122,13 @@ function btnCopiar() {
 
 function alerta(mensaje, estado) {
   let alerta = document.querySelector('.alerta');
-  alerta.style.background = estado === 'ok' ? '#2A2B2E' : '#FF928B'; 
+  alerta.style.background = estado === 'ok' ? '#2A2B2E' : '#c52f2f'; 
   alerta.innerHTML = mensaje
   alerta.style.opacity = '1';
 
   setTimeout(() => {    
   alerta.style.opacity = '0';
-  }, 2000);
+  }, 3000);
 }
 
 function reiniciar() {
@@ -138,12 +140,18 @@ function reiniciar() {
 
 cambiarTextoProceso();
 
-
-// hacer auto height a text-area
-textArea.setAttribute("style", "height:" + (textArea.scrollHeight) + "px;overflow-y:hidden;");
 textArea.addEventListener("input", OnInput, false);
 
 function OnInput() {
   this.style.height = 'auto';
   this.style.height = (this.scrollHeight) + "px";
 }
+
+textArea.addEventListener("keydown", (event) => {
+  let letra = event.key;
+  if (event.key == " " || event.key.length > 1 || (event.key.length == 1 && /^[a-z]{1}$/.test(letra))) {
+  } else {
+    alerta("Solo se permiten letras minúsculas, sin caracteres especiales y sin acentos", 'error');
+    event.preventDefault();
+  }
+});
